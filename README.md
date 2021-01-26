@@ -1,6 +1,3 @@
-> 组件化讨论群：已经拉个讨论群，可以关注公众号，微信搜 胡飞洋， 里面有加我微信的入口，我拉你进群 ，这样大家都可以讨论~
-.
-
 AppLifecycle插件是使用了 APT技术、gradle插件技术+ASM动态生成字节码，在编译阶段就已经完成了大部分工作，无性能问题、且使用方便。
 
 # 1. **common组件依赖 applifecycle-api** 
@@ -11,7 +8,7 @@ AppLifecycle插件是使用了 APT技术、gradle插件技术+ASM动态生成字
 dependencies {
     ...
     //AppLifecycle
-    api 'com.github.hufeiyang.Android-AppLifecycleMgr:applifecycle-api:1.0.4'
+    api 'com.github.cocomikes.Android-AppLifecycleMgr:applifecycle-api:1.0.4'
 }
 ```
 # 2. **业务组件依赖applifecycle-compiler、实现接口+注解**
@@ -20,9 +17,8 @@ dependencies {
 ```java
 //业务组件 build.gradle
 ...
-	//这里Common:1.0.2内依赖了applifecycle-api
-    implementation 'com.github.hufeiyang:Common:1.0.2'
-    annotationProcessor 'com.github.hufeiyang.Android-AppLifecycleMgr:applifecycle-compiler:1.0.4'
+    implementation 'com.github.cocomikes.Android-AppLifecycleMgr:applifecycle-api:1.0.4'
+    annotationProcessor 'com.github.cocomikes.Android-AppLifecycleMgr:applifecycle-compiler:1.0.4'
 ```
 sync后，新建类来实现接口**IApplicationLifecycleCallbacks**用于接收Application生命周期，且添加@**AppLifecycle**注解。  
 
@@ -33,7 +29,7 @@ sync后，新建类来实现接口**IApplicationLifecycleCallbacks**用于接收
  * 组件的AppLifecycle
  * 1、@AppLifecycle
  * 2、实现IApplicationLifecycleCallbacks
- * @author hufeiyang
+ * @author cocomikes
  */
 @AppLifecycle
 public class CartApplication implements IApplicationLifecycleCallbacks {
@@ -93,7 +89,7 @@ buildscript {
         classpath 'com.android.tools.build:gradle:3.6.1'
 
         //加载插件applifecycle
-        classpath 'com.github.hufeiyang.Android-AppLifecycleMgr:applifecycle-plugin:1.0.3'
+        classpath 'com.github.cocomikes.Android-AppLifecycleMgr:applifecycle-plugin:1.0.4'
     }
 }
 ```
@@ -107,13 +103,9 @@ apply plugin: 'com.hm.plugin.lifecycle'
 ...
 dependencies {
     ...
-    //这里没有使用私有maven仓，而是发到JitPack仓，一样的意思~
-//    implementation 'com.hfy.cart:cart:1.0.0'
-    implementation 'com.github.hufeiyang.Cart:module_cart:1.0.11'
-    implementation 'com.github.hufeiyang:HomePage:1.0.5'
-
-    //壳工程内 也需要依赖Common组件，因为要 触发生命周期分发
-    implementation 'com.github.hufeiyang:Common:1.0.2'
+    //壳工程
+    implementation 'com.github.cocomikes.Android-AppLifecycleMgr:applifecycle-api:1.0.4'
+    annotationProcessor 'com.github.cocomikes.Android-AppLifecycleMgr:applifecycle-compiler:1.0.4'
 }
 ```
 最后需要在Application中触发生命周期的分发：
