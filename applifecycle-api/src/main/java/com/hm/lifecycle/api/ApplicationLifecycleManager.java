@@ -51,6 +51,16 @@ public class ApplicationLifecycleManager {
         }
     }
 
+    public static void attachBaseContext(Context context){
+        if (lifecycleCallbacks.isEmpty()) {
+            return;
+        }
+        Collections.sort(lifecycleCallbacks, new ApplicationLifecycleComparator());
+        for (IApplicationLifecycleCallbacks callbacks : lifecycleCallbacks) {
+            callbacks.attachBaseContext(context);
+        }
+    }
+
     public static void onCreate(Context context) {
         if (lifecycleCallbacks.isEmpty()) {
             return;
