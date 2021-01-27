@@ -32,11 +32,12 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
-    implementation project(':applifecycle-annotation')
-    implementation project(':applifecycle-api')
-    annotationProcessor project(':applifecycle-compiler')
+//    implementation project(':applifecycle-annotation')
+//    implementation project(':applifecycle-api')
+//    annotationProcessor project(':applifecycle-compiler')
 
-//    implementation 'com.github.cocomikes.Android-AppLifecycleMgr:applifecycle-api:1.0.4'
-//    annotationProcessor 'com.github.cocomikes.Android-AppLifecycleMgr:applifecycle-compiler:1.0.4'
+    implementation 'com.github.cocomikes.Android-AppLifecycleMgr:applifecycle-annotation:1.0.6'
+    implementation 'com.github.cocomikes.Android-AppLifecycleMgr:applifecycle-api:1.0.6'
+    annotationProcessor 'com.github.cocomikes.Android-AppLifecycleMgr:applifecycle-compiler:1.0.6'
 
 }
