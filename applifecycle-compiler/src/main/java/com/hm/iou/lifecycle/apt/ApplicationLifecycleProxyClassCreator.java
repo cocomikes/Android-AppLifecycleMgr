@@ -18,7 +18,7 @@ import javax.lang.model.type.TypeMirror;
  * Created by hjy on 2018/10/23.
  */
 public class ApplicationLifecycleProxyClassCreator {
-
+    private static final String METHOD_ATTACH_BASE_CONTEXT = "attachBaseContext";
     private static final String METHOD_ON_CREATE = "onCreate";
     private static final String METHOD_ON_TERMINATE = "onTerminate";
     private static final String METHOD_ON_LOW_MEMORY = "onLowMemory";
@@ -46,6 +46,7 @@ public class ApplicationLifecycleProxyClassCreator {
                 .addField(TypeName.get(typeElement.getInterfaces().get(0)), FIELD_APPLICATION_LIFECYCLE_CALLBACK, Modifier.PRIVATE, Modifier.FINAL)
                 .addMethod(getConstructorMethod(typeElement))
                 .addMethod(getPriorityMethod())
+                .addMethod(getAttachBaseContextMethod(contextType))
                 .addMethod(getOnCreateMethod(contextType))
                 .addMethod(getOnLowMemoryMethod())
                 .addMethod(getOnTerminateMethod())
@@ -112,4 +113,13 @@ public class ApplicationLifecycleProxyClassCreator {
                 .build();
     }
 
+    private static MethodSpec getAttachBaseContextMethod(TypeMirror contextType) {
+        return MethodSpec.methodBuilder(METHOD_ATTACH_BASE_CONTEXT)
+                .addModifiers(Modifier.PUBLIC)
+                .returns(void.class)
+                .addAnnotation(Override.class)
+                .addParameter(TypeName.get(contextType), "context")
+                .addStatement("this.$N.$N($N)", FIELD_APPLICATION_LIFECYCLE_CALLBACK, METHOD_ATTACH_BASE_CONTEXT, "context")
+                .build();
+    }
 }

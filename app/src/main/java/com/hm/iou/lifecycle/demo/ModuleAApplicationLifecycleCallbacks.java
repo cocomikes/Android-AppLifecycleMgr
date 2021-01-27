@@ -18,6 +18,11 @@ public class ModuleAApplicationLifecycleCallbacks implements IApplicationLifecyc
     }
 
     @Override
+    public void attachBaseContext(Context context) {
+        Log.d("AppLifecycle", "attachBaseContext(): this is in ModuleAApplicationLifecycleCallbacks.");
+    }
+
+    @Override
     public void onCreate(Context context) {
         Log.d("AppLifecycle", "onCreate(): this is in ModuleAApplicationLifecycleCallbacks.");
     }
