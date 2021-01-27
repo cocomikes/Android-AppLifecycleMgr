@@ -1,6 +1,8 @@
 package com.hm.lifecycle.api;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 /**
  * Created by hjy on 2018/10/23.
@@ -12,11 +14,11 @@ public interface IApplicationLifecycleCallbacks {
     int MIN_PRIORITY = 1;
     int NORM_PRIORITY = 5;
 
-    void attachBaseContext(Context context);
+    void attachBaseContext(@Nullable Context context);
 
     int getPriority();
 
-    void onCreate(Context context);
+    void onCreate(@NonNull Context context);
 
     void onTerminate();
 

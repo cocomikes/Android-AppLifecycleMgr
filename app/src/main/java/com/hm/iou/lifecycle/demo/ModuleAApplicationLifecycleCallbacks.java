@@ -1,6 +1,8 @@
 package com.hm.iou.lifecycle.demo;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.hm.iou.lifecycle.annotation.AppLifecycle;
@@ -18,12 +20,12 @@ public class ModuleAApplicationLifecycleCallbacks implements IApplicationLifecyc
     }
 
     @Override
-    public void attachBaseContext(Context context) {
+    public void attachBaseContext(@Nullable Context context) {
         Log.d("AppLifecycle", "attachBaseContext(): this is in ModuleAApplicationLifecycleCallbacks.");
     }
 
     @Override
-    public void onCreate(Context context) {
+    public void onCreate(@NonNull Context context) {
         Log.d("AppLifecycle", "onCreate(): this is in ModuleAApplicationLifecycleCallbacks.");
     }
 
