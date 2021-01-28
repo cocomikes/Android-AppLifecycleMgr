@@ -14,9 +14,9 @@ public interface IApplicationLifecycleCallbacks {
     int MIN_PRIORITY = 1;
     int NORM_PRIORITY = 5;
 
-    void attachBaseContext(@Nullable Context context);
-
     int getPriority();
+
+    void attachBaseContext(@Nullable Context context);
 
     void onCreate(@NonNull Context context);
 
